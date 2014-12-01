@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace Dijkstra
 {
@@ -44,7 +45,9 @@ namespace Dijkstra
             //T--->Keine weiteren Verbindungen
 
             rechnung = new CDijkstra(knoten, verbindungen);
-            rechnung.Solve();
+            //rechnung.Solve();
+            FGraph graph = new FGraph(knoten, verbindungen);
+            Application.Run(graph);
             Console.ReadKey();
         }
     }

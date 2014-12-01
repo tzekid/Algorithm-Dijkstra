@@ -46,11 +46,22 @@
     <Compile Include="CDijkstra.cs" />
     <Compile Include="CKnoten.cs" />
     <Compile Include="CVerbindung.cs" />
+    <Compile Include="FGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGraph.Designer.cs">
+      <DependentUpon>FGraph.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FGraph.resx">
+      <DependentUpon>FGraph.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
