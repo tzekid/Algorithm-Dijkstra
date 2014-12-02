@@ -29,22 +29,23 @@ namespace Dijkstra
             while(stoppKnoten.GetState() == "offen")
             {
                 Console.WriteLine("=================================================================================");
-                for (int i = 0; i <= knoten.Count - 1; i++)
+                CVerbindung kürzesteVerbindungZuEinemOffenenPunkt = null;
+                foreach(CKnoten aktiverKnote in ErmittleAktivePunkte())
                 {
-                    Console.WriteLine("----------------------------------------------------------------------------------");
-                    foreach(CKnoten aktiverKnote in ErmittleAktivePunkte())
+                    try
                     {
-                        CVerbindung tmpVerbindung = ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote);
-                        if (tmpVerbindung != null)
-                        {
-                            Console.WriteLine("Verbindung: " + tmpVerbindung.GetStart().GetName() + " to " + tmpVerbindung.GetStopp().GetName() + ", " + tmpVerbindung.GetWert());
-                            SetState(tmpVerbindung.GetStopp(), "aktiv");
-                            RemoveVerbindung(tmpVerbindung);
-                        }
-                        
+                        CVerbindung aktVerbindung = ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote);
+                        if (kürzesteVerbindungZuEinemOffenenPunkt == null || aktVerbindung.GetWert() < kürzesteVerbindungZuEinemOffenenPunkt.GetWert())
+                            kürzesteVerbindungZuEinemOffenenPunkt = aktVerbindung;
                     }
-                    Console.WriteLine("----------------------------------------------------------------------------------");
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("----->" + ex.Message.ToString());
+                    }
                 }
+                SetState(kürzesteVerbindungZuEinemOffenenPunkt.GetStopp(), "aktiv");
+                Console.WriteLine("Verbindung: " + kürzesteVerbindungZuEinemOffenenPunkt.GetStart().GetName() + " to " + kürzesteVerbindungZuEinemOffenenPunkt.GetStopp().GetName() + ", " + kürzesteVerbindungZuEinemOffenenPunkt.GetWert());
+                RemoveVerbindung(kürzesteVerbindungZuEinemOffenenPunkt);
                 Console.WriteLine("=================================================================================");
             }
         }
@@ -69,7 +70,7 @@ namespace Dijkstra
                         {
                             tmpVerbindung = verbindung;
                         }
-                        Console.WriteLine("Verbindung: " + verbindung.GetStart().GetName() + " to " + verbindung.GetStopp().GetName());
+                       // Console.WriteLine("Verbindung: " + verbindung.GetStart().GetName() + " to " + verbindung.GetStopp().GetName());
                     }
                 }
             }

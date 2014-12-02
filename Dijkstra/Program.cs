@@ -45,9 +45,8 @@ namespace Dijkstra
             //T--->Keine weiteren Verbindungen
 
             rechnung = new CDijkstra(knoten, verbindungen);
-            //rechnung.Solve();
-            FGraph graph = new FGraph(knoten, verbindungen);
-            Application.Run(graph);
+            rechnung.Solve();
+   
             Console.ReadKey();
         }
     }
