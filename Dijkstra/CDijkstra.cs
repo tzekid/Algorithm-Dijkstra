@@ -26,51 +26,46 @@ namespace Dijkstra
             //Console.WriteLine("Stopppunkt: " + stoppKnoten.GetName());
 
             SetState(startKnoten, "aktiv");
+           
             while(stoppKnoten.GetState() == "offen")
             {
                 Console.WriteLine("=================================================================================");
                 CVerbindung kürzesteVerbindungZuEinemOffenenPunkt = null;
                 foreach(CKnoten aktiverKnote in ErmittleAktivePunkte())
                 {
-                    try
+                    if (ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote) == null)
+                    {
+                        SetState(aktiverKnote, "geschlossen");
+                    }
+                    else
                     {
                         CVerbindung aktVerbindung = ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote);
-                        if (kürzesteVerbindungZuEinemOffenenPunkt == null || aktVerbindung.GetWert() < kürzesteVerbindungZuEinemOffenenPunkt.GetWert())
+
+                        if (kürzesteVerbindungZuEinemOffenenPunkt == null || (aktVerbindung.GetWert() + aktVerbindung.GetStart().GetWegWert()) < (kürzesteVerbindungZuEinemOffenenPunkt.GetWert() + kürzesteVerbindungZuEinemOffenenPunkt.GetStart().GetWegWert()))
                             kürzesteVerbindungZuEinemOffenenPunkt = aktVerbindung;
-                    }
-                    catch(Exception ex)
-                    {
-                        Console.WriteLine("----->" + ex.Message.ToString());
                     }
                 }
                 SetState(kürzesteVerbindungZuEinemOffenenPunkt.GetStopp(), "aktiv");
-                Console.WriteLine("Verbindung: " + kürzesteVerbindungZuEinemOffenenPunkt.GetStart().GetName() + " to " + kürzesteVerbindungZuEinemOffenenPunkt.GetStopp().GetName() + ", " + kürzesteVerbindungZuEinemOffenenPunkt.GetWert());
+                SetWegWert(kürzesteVerbindungZuEinemOffenenPunkt.GetStopp(), kürzesteVerbindungZuEinemOffenenPunkt.GetStart().GetWegWert() + kürzesteVerbindungZuEinemOffenenPunkt.GetWert());
+                Console.WriteLine("Verbindung: " + kürzesteVerbindungZuEinemOffenenPunkt.GetStart().GetName() + " to " + kürzesteVerbindungZuEinemOffenenPunkt.GetStopp().GetName() + ", " + kürzesteVerbindungZuEinemOffenenPunkt.GetWert() + "; "+ kürzesteVerbindungZuEinemOffenenPunkt.GetStopp().GetWegWert());
                 RemoveVerbindung(kürzesteVerbindungZuEinemOffenenPunkt);
                 Console.WriteLine("=================================================================================");
             }
         }
         //Zustande:
         //  - offen (nicht erfasst)
-        //  - aktiv (ist besucht)
+        //  - aktiv (ist besucht) (hat noch offene Verbindungen)
         //  - geschlossen (erfasst; für die weitere Verwendung nicht relevant)
         private CVerbindung ErmittleKürzesteVerbindung(ArrayList verbindungen, CKnoten aktiverKnote)
         {
             CVerbindung tmpVerbindung = null;
-            foreach(CKnoten offenerKnoten in ErmittleOffenePunkte(aktiverKnote))
+            foreach (CVerbindung verbindung in verbindungen)
             {
-                foreach(CVerbindung verbindung in verbindungen)
+                foreach(CKnoten knote in ErmittleOffenePunkte(aktiverKnote))
                 {
-                    if(verbindung.GetStart() == aktiverKnote && verbindung.GetStopp() == offenerKnoten)
+                    if(verbindung.GetStart().GetName() == aktiverKnote.GetName() && verbindung.GetStopp().GetName() == verbindung.GetStopp().GetName())
                     {
-                        if(tmpVerbindung == null)
-                        {
-                            tmpVerbindung = verbindung;
-                        }
-                        else if(verbindung.GetWert() < tmpVerbindung.GetWert())
-                        {
-                            tmpVerbindung = verbindung;
-                        }
-                       // Console.WriteLine("Verbindung: " + verbindung.GetStart().GetName() + " to " + verbindung.GetStopp().GetName());
+                        if (tmpVerbindung == null || verbindung.GetWert() < tmpVerbindung.GetWert()) tmpVerbindung = verbindung;
                     }
                 }
             }
@@ -92,7 +87,6 @@ namespace Dijkstra
         }
         private void SetState(CKnoten knote, string state) //State eines Knoten ändern
         {
-           // Console.WriteLine("Knoten: " + knote.GetName());
             foreach(CKnoten knt in knoten)
             {
                 if (knt == knote)
@@ -104,6 +98,18 @@ namespace Dijkstra
             {
                 if (verb.GetStart() == knote) verb.GetStart().SetState(state);
                 if (verb.GetStopp() == knote) verb.GetStopp().SetState(state);
+            }
+        }
+        private void SetWegWert(CKnoten knote, int wert)
+        {
+            foreach(CKnoten knt in knoten)
+            {
+                knt.SetWegWert(wert);
+            }
+            foreach(CVerbindung verbindung in verbindungen)
+            {
+                if (verbindung.GetStart() == knote) verbindung.GetStart().SetWegWert(wert);
+                if (verbindung.GetStopp() == knote) verbindung.GetStopp().SetWegWert(wert);
             }
         }
         private CKnoten ErmittleStartKnoten(ArrayList verbindungen, ArrayList knoten) //Ermittelt Startknoten

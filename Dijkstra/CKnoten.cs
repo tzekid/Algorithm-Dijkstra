@@ -10,10 +10,12 @@ namespace Dijkstra
     {
         string name;
         string state;
+        int wegWert;
         public CKnoten(string name, string state)
         {
             this.name = name;
             this.state = state;
+            this.wegWert = 0;
         }
         public string GetName()
         {
@@ -26,6 +28,14 @@ namespace Dijkstra
         public void SetState(string state)
         {
             this.state = state;
+        }
+        public int GetWegWert()
+        {
+            return wegWert;
+        }
+        public void SetWegWert(int value)
+        {
+            wegWert = value;
         }
     }
 }
