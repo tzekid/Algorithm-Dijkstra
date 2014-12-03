@@ -15,7 +15,7 @@ namespace Dijkstra
         {
             this.name = name;
             this.state = state;
-this.wegWert = 0;
+            this.wegWert = 0;
         }
         public string GetName()
         {

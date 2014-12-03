@@ -26,17 +26,30 @@ namespace Dijkstra
             //Console.WriteLine("Stopppunkt: " + stoppKnoten.GetName());
             SetState(startKnoten, "aktiv");
             SetWegWert(startKnoten, 0);
-            while(stoppKnoten.GetState() == "offen")
+            while (stoppKnoten.GetState() == "offen")
             {
                 Console.WriteLine("=================================================================================");
                 CVerbindung verbindung = ErmittleKürzesteVerbindungUnterallenAktivenVerbindungen();
                 RemoveVerbindung(verbindung);
-               // Console.WriteLine("====????====>" + verbindung.GetStopp().GetName());
-                int summe = verbindung.GetWert() + verbindung.GetStart().GetWegWert();
-                SetWegWert(verbindung.GetStopp(), summe);
-                SetState(verbindung.GetStopp(), "aktiv");
-                Console.WriteLine("Ausgewählter Knoten: " + verbindung.GetStopp().GetName() + "(" +verbindung.GetStart().GetName() + ")");
+                if (verbindung != null)
+                {
+                    // Console.WriteLine("====????====>" + verbindung.GetStopp().GetName());
+                    int summe = verbindung.GetWert() + verbindung.GetStart().GetWegWert();
+                    SetWegWert(verbindung.GetStopp(), summe);
+                    SetState(verbindung.GetStopp(), "aktiv");
+                    Console.WriteLine("Ausgewählter Knoten: " + verbindung.GetStopp().GetName() + "(" + verbindung.GetStart().GetName() + ")");
+
+                    foreach (CKnoten knt in ErmittleOffenePunkte(verbindung.GetStopp()))
+                    {
+                        CVerbindung tmpVerbindung = ErmittleKürzesteVerbindung(new ArrayList(verbindungen), knt);
+                        if (tmpVerbindung != null && tmpVerbindung.GetStopp() != stoppKnoten)
+                        {
+                            RemoveVerbindung(tmpVerbindung);
+                        }
+                    }
+                }
                 //Console.WriteLine("=================================================================================");
+
             }
         }
         private CVerbindung ErmittleKürzesteVerbindungUnterallenAktivenVerbindungen()
@@ -83,12 +96,16 @@ namespace Dijkstra
         {
             for (int i = 0; i < verbindungen.Count; i++)
             {
-                CVerbindung tmpVerbindung = (CVerbindung)verbindungen[i];
-                if (tmpVerbindung.GetStart() == verbindung.GetStart() && tmpVerbindung.GetStopp() == verbindung.GetStopp() && tmpVerbindung.GetWert() == verbindung.GetWert())
+                try
                 {
-                   // Console.WriteLine("Lösche verbindung: " + verbindung.GetStart().GetName() + " to " + verbindung.GetStopp().GetName());
-                    verbindungen.RemoveAt(i);
+                    CVerbindung tmpVerbindung = (CVerbindung)verbindungen[i];
+                    if (tmpVerbindung.GetStart() == verbindung.GetStart() && tmpVerbindung.GetStopp() == verbindung.GetStopp() && tmpVerbindung.GetWert() == verbindung.GetWert())
+                    {
+                        // Console.WriteLine("Lösche verbindung: " + verbindung.GetStart().GetName() + " to " + verbindung.GetStopp().GetName());
+                        verbindungen.RemoveAt(i);
+                    }
                 }
+                catch { }
             }
         }
         private void SetState(CKnoten knote, string state) //State eines Knoten ändern
