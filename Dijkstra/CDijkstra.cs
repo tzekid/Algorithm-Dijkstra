@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 
 namespace Dijkstra
@@ -66,10 +62,7 @@ namespace Dijkstra
             CVerbindung kürzesteVerbindungZuEinemOffenenPunkt = null;
             foreach (CKnoten aktiverKnote in ErmittleAktivePunkte())
             {
-                if (ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote) == null)
-                {
-                    SetState(aktiverKnote, "geschlossen");
-                }
+                if (ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote) == null) SetState(aktiverKnote, "geschlossen");
                 else
                 {
                     CVerbindung aktVerbindung = ErmittleKürzesteVerbindung(new ArrayList(verbindungen), aktiverKnote);
@@ -105,7 +98,7 @@ namespace Dijkstra
             {
                 CVerbindung tmpVerbindung = (CVerbindung)verbindungen[i];
                 if (tmpVerbindung != null)
-                {
+                {// WHY GIBT ES HIER IMMER BEI DER LETZTEN VERBINDUNG EINEN FEHLER!!!!!!!!!!!!!!!!!!! ;-(((((
                     try
                     {
                         if (tmpVerbindung.GetStart() == verbindung.GetStart() && tmpVerbindung.GetStopp() == verbindung.GetStopp() && tmpVerbindung.GetWert() == verbindung.GetWert())
@@ -142,10 +135,10 @@ namespace Dijkstra
         private void SetKnotenWert(CKnoten knote, int wert)
         {
             foreach(CKnoten knt in knoten)
-                if(knt == knote) knt.SetWegWert(wert);
+                if (knt == knote) knt.SetKnotenWert(wert);
 
             foreach(CVerbindung verbindung in verbindungen)
-                if (verbindung.GetStopp() == knote) verbindung.GetStopp().SetWegWert(wert);
+                if (verbindung.GetStopp() == knote) verbindung.GetStopp().SetKnotenWert(wert);
         }
         /// <summary>
         /// Ermittelt den Startknoten
