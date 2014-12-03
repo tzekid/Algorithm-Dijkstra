@@ -45,7 +45,7 @@ namespace Dijkstra
             //T--->Keine weiteren Verbindungen
 
             rechnung = new CDijkstra(knoten, verbindungen);
-            rechnung.Solve();
+            Console.WriteLine(rechnung.Solve());
    
             Console.ReadKey();
         }
