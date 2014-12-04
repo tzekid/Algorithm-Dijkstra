@@ -7,6 +7,8 @@ namespace Dijkstra
     {
         private ArrayList knoten;
         private ArrayList verbindungen;
+        private string kürzesterWeg = "";
+        private int längeWeg = 0;
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -20,7 +22,7 @@ namespace Dijkstra
         /// <summary>
         /// Ermittelt die Kürzeste Strecke durch die Verbindungen und Knoten
         /// </summary>
-        public string Solve()
+        public void Solve()
         {
             CKnote startKnoten = ErmittleStartKnoten(verbindungen, new ArrayList(knoten));
             CKnote stoppKnoten = ErmittleEndKnoten(verbindungen, new ArrayList(knoten));
@@ -45,7 +47,23 @@ namespace Dijkstra
                     rtnWeg.Add(verbindung);
                 }
             }
-            return ErmittleEndWeg(rtnWeg);
+            kürzesterWeg = ErmittleEndWeg(rtnWeg);
+        }
+        /// <summary>
+        /// Gibt den Kürzesten Weg zurück. Vorher muss aber die Methode Solve() ausgeführt sein.
+        /// </summary>
+        /// <returns></returns>
+        public string GetWeg()
+        {
+            return kürzesterWeg;
+        }
+        /// <summary>
+        /// Gibt die länge des Kürzesten Weg zurück. Vorher muss aber die Methode Solve() ausgeführt sein.
+        /// </summary>
+        /// <returns></returns>
+        public int GetWegLänge()
+        {
+            return längeWeg;
         }
         /// <summary>
         /// Wandelt den kürzesten Weg (ArrayList) in einem string um
@@ -74,7 +92,7 @@ namespace Dijkstra
             string rtnFinal = "";
             for (int i = rtn.Length - 1; i > -1; i--)
                 rtnFinal += rtn[i] + " ";
-            rtnFinal += ", " + stoppVer.GetStopp().GetKnotenWert();
+            längeWeg = stoppVer.GetStopp().GetKnotenWert();
             return rtnFinal;
         }
         /// <summary>

@@ -7,7 +7,9 @@ namespace Dijkstra
     {
         private static void Main()
         {
-            Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1");
+            Console.SetWindowSize(Console.WindowWidth * 2, Console.WindowHeight * 2);
+    
+            Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1 - Coded in Frankfurt with love");
             Console.WriteLine("_______________________________________________________________________________");
             
             ArrayList knoten = new ArrayList();
@@ -42,21 +44,35 @@ namespace Dijkstra
 
             Console.WriteLine("\nAlle Knoten:");
             foreach(CKnote knt in knoten)
-            {
                 Console.WriteLine("  " + knt.GetName());
-            }
             Console.WriteLine("\nAlle Verbindungen:");
             foreach(CVerbindung verbindung in verbindungen)
-            {
                 Console.WriteLine("  " + verbindung.GetStart().GetName() + " zu " + verbindung.GetStopp().GetName());
-            }
             CDijkstra graph = new CDijkstra(new ArrayList(knoten), new ArrayList(verbindungen));
-
             Console.WriteLine("\nStart: \n  " + graph.ErmittleStartKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName());
-            Console.WriteLine("\nStopp: \n  " + graph.ErmittleEndKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName() + "\n\n");
-
-            Console.WriteLine("Kürzester Weg, Länge des Weges: \n  " + graph.Solve());
+            Console.WriteLine("\nStopp: \n  " + graph.ErmittleEndKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName() + "\n");
+            
+            graph.Solve();
+            
+            Console.WriteLine("Kürzester Weg: \n  " + graph.GetWeg());
+            Console.WriteLine("\nLänge des Weges: \n  " + graph.GetWegLänge());
+            Console.WriteLine("\n\n  (Press any key to exit...)");
             Console.ReadKey();
         }
     }
 }
+
+
+
+//Pen pen = new Pen(Color.FromArgb(255, 0, 0, 0));
+//e.Graphics.DrawLine(pen, 20, 10, 300, 100);
+/*int x = 0;
+
+foreach(CKnote knt in knoten)
+{
+    Label lbn = new Label();
+    lbn.Location = new Point(x, 50);
+    lbn.Text = knt.GetName();
+    this.Controls.Add(lbn);
+    x += 20;
+}*/
