@@ -5,8 +5,8 @@ namespace Dijkstra
 {
     class CDijkstra
     {
-        private ArrayList knoten = new ArrayList();
-        private ArrayList verbindungen = new ArrayList();
+        private ArrayList knoten;
+        private ArrayList verbindungen;
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -47,7 +47,7 @@ namespace Dijkstra
             return ErmittleEndWeg(rtnWeg);
         }
         /// <summary>
-        /// Wandelt den kürzesten Weg (ArrayList) in string um
+        /// Wandelt den kürzesten Weg (ArrayList) in einem string um
         /// </summary>
         /// <param name="rtnWeg"></param>
         /// <returns></returns>
@@ -79,7 +79,7 @@ namespace Dijkstra
         /// <summary>
         /// Ermittelt die kürzeste Verbindung von allen Verbindungen von aktiven Knoten zu einem offenen Knoten
         /// </summary>
-        /// <returns>Verbindung</returns>
+        /// <returns></returns>
         private CVerbindung ErmittleKürzesteVerbindungUnterallenAktivenVerbindungen()
         {
             CVerbindung kürzesteVerbindungZuEinemOffenenPunkt = null;
@@ -100,7 +100,7 @@ namespace Dijkstra
         /// </summary>
         /// <param name="verbindungen"></param>
         /// <param name="aktiverKnote"></param>
-        /// <returns>Verbindung</returns>
+        /// <returns></returns>
         private CVerbindung ErmittleKürzesteVerbindung(ArrayList verbindungen, CKnote aktiverKnote)
         {
             CVerbindung tmpVerbindung = null;
@@ -195,7 +195,7 @@ namespace Dijkstra
         /// <summary>
         /// Offene Punkte ermitteln
         /// </summary>
-        /// <param name="aktivenKnoten">AktiverKnoten für den offene Knoten ermittelt werden sollen.</param>
+        /// <param name="aktivenKnoten"></param>
         /// <returns>ArrayList</returns>
         private ArrayList ErmittleOffeneKnoten(CKnote aktivenKnoten)
         {
