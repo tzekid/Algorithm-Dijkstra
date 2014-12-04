@@ -5,19 +5,18 @@ namespace Dijkstra
 {
     class Program
     {
-        private static ArrayList verbindungen = new ArrayList();
-        private static ArrayList knoten = new ArrayList();
-        private static CDijkstra rechnung;
-
         private static void Main()
-        { 
+        {
+            ArrayList knoten = new ArrayList();
             knoten.Add(new CKnote("S", "offen"));//0
             knoten.Add(new CKnote("A", "offen"));//1
             knoten.Add(new CKnote("B", "offen"));//2
             knoten.Add(new CKnote("C", "offen"));//3
             knoten.Add(new CKnote("D", "offen"));//4
             knoten.Add(new CKnote("E", "offen"));//5
-            knoten.Add(new CKnote("T", "offen"));//6 
+            knoten.Add(new CKnote("T", "offen"));//6
+
+            ArrayList verbindungen = new ArrayList();
             //S
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[1], 4)); //S to A
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[2], 6)); //S to B
@@ -36,12 +35,13 @@ namespace Dijkstra
             verbindungen.Add(new CVerbindung((CKnote)knoten[4], (CKnote)knoten[6], 6)); //D to T
             //E
             verbindungen.Add(new CVerbindung((CKnote)knoten[5], (CKnote)knoten[6], 8)); //E to T
-            //T----=>
             //Z--->Keine weiteren Verbindungen
 
-            rechnung = new CDijkstra(knoten, verbindungen);
-            Console.WriteLine(rechnung.Solve());
-           
+
+            CDijkstra graph = new CDijkstra(knoten, verbindungen);
+            Console.WriteLine(graph.Solve());
+
+
             Console.ReadKey();
         }
     }
