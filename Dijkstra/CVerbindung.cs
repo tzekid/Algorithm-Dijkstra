@@ -3,8 +3,8 @@ namespace Dijkstra
 {
     class CVerbindung
     {
-        CKnoten start;
-        CKnoten stopp;
+        CKnote start;
+        CKnote stopp;
         int wert;
         /// <summary>
         /// Konstruktor
@@ -12,7 +12,7 @@ namespace Dijkstra
         /// <param name="start"></param>
         /// <param name="stopp"></param>
         /// <param name="wert"></param>
-        public CVerbindung(CKnoten start, CKnoten stopp, int wert)
+        public CVerbindung(CKnote start, CKnote stopp, int wert)
         {
             this.start = start;
             this.stopp = stopp;
@@ -22,7 +22,7 @@ namespace Dijkstra
         /// Gibt den Startknoten zurück
         /// </summary>
         /// <returns></returns>
-        public CKnoten GetStart()
+        public CKnote GetStart()
         {
             return start;
         }
@@ -30,7 +30,7 @@ namespace Dijkstra
         /// Gibt den Zielknoten zurück
         /// </summary>
         /// <returns></returns>
-        public CKnoten GetStopp()
+        public CKnote GetStopp()
         {
             return stopp;
         }

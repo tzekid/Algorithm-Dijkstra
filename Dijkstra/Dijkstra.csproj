@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDijkstra.cs" />
-    <Compile Include="CKnoten.cs" />
+    <Compile Include="CKnote.cs" />
     <Compile Include="CVerbindung.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

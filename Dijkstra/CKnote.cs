@@ -1,7 +1,7 @@
 ﻿
 namespace Dijkstra
 {
-    class CKnoten
+    class CKnote
     {
         string name;
         string state;
@@ -11,7 +11,7 @@ namespace Dijkstra
         /// </summary>
         /// <param name="name"></param>
         /// <param name="state"></param>
-        public CKnoten(string name, string state)
+        public CKnote(string name, string state)
         {
             this.name = name;
             this.state = state;
@@ -23,7 +23,7 @@ namespace Dijkstra
         /// <param name="name"></param>
         /// <param name="state"></param>
         /// <param name="wert"></param>
-        public CKnoten(string name, string state, int wert)
+        public CKnote(string name, string state, int wert)
         {
             this.name = name;
             this.state = state;
