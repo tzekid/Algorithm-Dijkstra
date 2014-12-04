@@ -41,14 +41,40 @@ namespace Dijkstra
                     int summe = verbindung.GetWert() + verbindung.GetStart().GetKnotenWert();
                     SetKnotenWert(verbindung.GetStopp(), summe);
                     SetState(verbindung.GetStopp(), "aktiv");
-                    rtnWeg.Add(verbindung.GetStopp().GetName() + "(" + verbindung.GetStart().GetName() + "), " + (verbindung.GetWert() + verbindung.GetStart().GetKnotenWert()));
+                    rtnWeg.Add(verbindung);
                 }
             }
-
-            string returnStr = "";
-            foreach(string str in rtnWeg)
-                returnStr += str + "\n";
-            return returnStr;
+            return ErmittleEndWeg(rtnWeg);
+        }
+        /// <summary>
+        /// Wandelt den kürzesten Weg (ArrayList) in string um
+        /// </summary>
+        /// <param name="rtnWeg"></param>
+        /// <returns></returns>
+        private string ErmittleEndWeg(ArrayList rtnWeg)
+        {
+            CVerbindung stoppVer = (CVerbindung)rtnWeg[rtnWeg.Count - 1];
+            string rtn = stoppVer.GetStopp().GetName();
+            CVerbindung last = stoppVer;
+            for (int i = 0; i < rtnWeg.Count; i++)
+            {
+                foreach(CVerbindung tmpVer in rtnWeg)
+                {
+                    if (tmpVer.GetStopp() == last.GetStart())
+                    {
+                        rtn += tmpVer.GetStopp().GetName();
+                        last = tmpVer;
+                        break;
+                    }
+                }
+            }
+            CVerbindung startVer = (CVerbindung)rtnWeg[0];
+            rtn += startVer.GetStart().GetName();
+            string rtnFinal = "";
+            for (int i = rtn.Length - 1; i > -1; i--)
+                rtnFinal += rtn[i] + " ";
+            rtnFinal += ", " + stoppVer.GetStopp().GetKnotenWert();
+            return rtnFinal;
         }
         /// <summary>
         /// Ermittelt die kürzeste Verbindung von allen Verbindungen von aktiven Knoten zu einem offenen Knoten

@@ -37,10 +37,8 @@ namespace Dijkstra
             verbindungen.Add(new CVerbindung((CKnote)knoten[5], (CKnote)knoten[6], 8)); //E to T
             //Z--->Keine weiteren Verbindungen
 
-
             CDijkstra graph = new CDijkstra(knoten, verbindungen);
             Console.WriteLine(graph.Solve());
-
 
             Console.ReadKey();
         }
