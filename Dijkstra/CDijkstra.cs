@@ -9,19 +9,12 @@ namespace Dijkstra
         private ArrayList verbindungen;
         private string kürzesterWeg = "";
         private int längeWeg = 0;
-        /// <summary>
-        /// Konstruktor
-        /// </summary>
-        /// <param name="knoten"></param>
-        /// <param name="verbindungen"></param>
+
         public CDijkstra(ArrayList knoten, ArrayList verbindungen)
         {
             this.knoten = knoten;
             this.verbindungen = verbindungen;
         }
-        /// <summary>
-        /// Ermittelt die Kürzeste Strecke durch die Verbindungen und Knoten
-        /// </summary>
         public void Solve()
         {
             CKnote startKnoten = ErmittleStartKnoten(verbindungen, new ArrayList(knoten));
@@ -49,27 +42,14 @@ namespace Dijkstra
             }
             kürzesterWeg = ErmittleEndWeg(rtnWeg);
         }
-        /// <summary>
-        /// Gibt den Kürzesten Weg zurück. Vorher muss aber die Methode Solve() ausgeführt sein.
-        /// </summary>
-        /// <returns></returns>
         public string GetWeg()
         {
             return kürzesterWeg;
         }
-        /// <summary>
-        /// Gibt die länge des Kürzesten Weg zurück. Vorher muss aber die Methode Solve() ausgeführt sein.
-        /// </summary>
-        /// <returns></returns>
         public int GetWegLänge()
         {
             return längeWeg;
         }
-        /// <summary>
-        /// Wandelt den kürzesten Weg (ArrayList) in einem string um
-        /// </summary>
-        /// <param name="rtnWeg"></param>
-        /// <returns></returns>
         private string ErmittleEndWeg(ArrayList rtnWeg)
         {
             CVerbindung stoppVer = (CVerbindung)rtnWeg[rtnWeg.Count - 1];
@@ -95,10 +75,6 @@ namespace Dijkstra
             längeWeg = stoppVer.GetStopp().GetKnotenWert();
             return rtnFinal;
         }
-        /// <summary>
-        /// Ermittelt die kürzeste Verbindung von allen Verbindungen von aktiven Knoten zu einem offenen Knoten
-        /// </summary>
-        /// <returns></returns>
         private CVerbindung ErmittleKürzesteVerbindungUnterallenAktivenVerbindungen()
         {
             CVerbindung kürzesteVerbindungZuEinemOffenenPunkt = null;
@@ -114,12 +90,6 @@ namespace Dijkstra
             }
             return kürzesteVerbindungZuEinemOffenenPunkt;
         }
-        /// <summary>
-        /// Ermittelt die kürzeste Verbindung von einem aktiven Konten zu einem offen Knoten
-        /// </summary>
-        /// <param name="verbindungen"></param>
-        /// <param name="aktiverKnote"></param>
-        /// <returns></returns>
         private CVerbindung ErmittleKürzesteVerbindung(ArrayList verbindungen, CKnote aktiverKnote)
         {
             CVerbindung tmpVerbindung = null;
@@ -129,10 +99,6 @@ namespace Dijkstra
                         if (tmpVerbindung == null || verbindung.GetWert() < tmpVerbindung.GetWert()) tmpVerbindung = verbindung;
             return tmpVerbindung;
         }
-        /// <summary>
-        /// Entfernt eine Verbindung
-        /// </summary>
-        /// <param name="verbindung"></param>
         private void RemoveVerbindung(CVerbindung verbindung)
         {
             for (int i = 0; i < verbindungen.Count; i++)
@@ -143,11 +109,6 @@ namespace Dijkstra
                         verbindungen.RemoveAt(i);
             }
         }
-        /// <summary>
-        /// State eines Knoten ändern
-        /// </summary>
-        /// <param name="knote"></param>
-        /// <param name="state"></param>
         private void SetState(CKnote knote, string state) 
         {
             foreach(CKnote knt in knoten)
@@ -160,11 +121,6 @@ namespace Dijkstra
                 if (verb.GetStopp() == knote) verb.GetStopp().SetState(state);
             }
         }
-        /// <summary>
-        /// Setzt den Wert des Knotens
-        /// </summary>
-        /// <param name="knote"></param>
-        /// <param name="wert"></param>
         private void SetKnotenWert(CKnote knote, int wert)
         {
             foreach(CKnote knt in knoten)
@@ -173,12 +129,6 @@ namespace Dijkstra
             foreach(CVerbindung verbindung in verbindungen)
                 if (verbindung.GetStopp() == knote) verbindung.GetStopp().SetKnotenWert(wert);
         }
-        /// <summary>
-        /// Ermittelt den Startknoten
-        /// </summary>
-        /// <param name="verbindungen"></param>
-        /// <param name="knoten"></param>
-        /// <returns></returns>
         public CKnote ErmittleStartKnoten(ArrayList verbindungen, ArrayList knoten) 
         {
             foreach(CVerbindung verbindung in verbindungen)
@@ -186,12 +136,6 @@ namespace Dijkstra
                     if (verbindung.GetStopp() == (CKnote)knoten[i]) knoten.RemoveAt(i);
             return (CKnote)knoten[knoten.Count - 1];
         }
-        /// <summary>
-        /// Ermittelt den Zielknoten.
-        /// </summary>
-        /// <param name="verbindungen"></param>
-        /// <param name="knoten"></param>
-        /// <returns></returns>
         public CKnote ErmittleEndKnoten(ArrayList verbindungen, ArrayList knoten) 
         {
             foreach (CVerbindung verbindung in verbindungen)
@@ -199,10 +143,6 @@ namespace Dijkstra
                     if (verbindung.GetStart() == (CKnote)knoten[i]) knoten.RemoveAt(i);
             return (CKnote)knoten[knoten.Count - 1];
         }
-        /// <summary>
-        /// Aktive Knoten ermitteln
-        /// </summary>
-        /// <returns></returns>
         private ArrayList ErmittleAktivePunkte() 
         {
             ArrayList rtn = new ArrayList();
@@ -211,11 +151,6 @@ namespace Dijkstra
                     rtn.Add(knote);
             return rtn;
         }
-        /// <summary>
-        /// Offene Punkte ermitteln
-        /// </summary>
-        /// <param name="aktivenKnoten"></param>
-        /// <returns>ArrayList</returns>
         private ArrayList ErmittleOffeneKnoten(CKnote aktivenKnoten)
         {
             ArrayList rtn = new ArrayList();

@@ -7,11 +7,13 @@ namespace Dijkstra
     {
         private static void Main()
         {
+            //Console größer machen
             Console.SetWindowSize(Console.WindowWidth * 2, Console.WindowHeight * 2);
-    
+
             Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1");
             Console.WriteLine("_______________________________________________________________________________");
             
+            //Knoten erstellen
             ArrayList knoten = new ArrayList();
             knoten.Add(new CKnote("S", "offen"));//0
             knoten.Add(new CKnote("A", "offen"));//1
@@ -21,6 +23,7 @@ namespace Dijkstra
             knoten.Add(new CKnote("E", "offen"));//5
             knoten.Add(new CKnote("T", "offen"));//6
 
+            //Verbindungen erstellen
             ArrayList verbindungen = new ArrayList();
             //S (Start)
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[1], 4)); //S to A
