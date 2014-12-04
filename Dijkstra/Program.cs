@@ -9,7 +9,7 @@ namespace Dijkstra
         {
             Console.SetWindowSize(Console.WindowWidth * 2, Console.WindowHeight * 2);
     
-            Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1 - Coded in Frankfurt with love");
+            Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1");
             Console.WriteLine("_______________________________________________________________________________");
             
             ArrayList knoten = new ArrayList();
@@ -42,20 +42,30 @@ namespace Dijkstra
             verbindungen.Add(new CVerbindung((CKnote)knoten[5], (CKnote)knoten[6], 8)); //E to T
             //T (Ziel)
 
+            //Alle Knoten ausgeben
             Console.WriteLine("\nAlle Knoten:");
             foreach(CKnote knt in knoten)
                 Console.WriteLine("  " + knt.GetName());
+
+            //Alle Verbindungen ausgeben
             Console.WriteLine("\nAlle Verbindungen:");
             foreach(CVerbindung verbindung in verbindungen)
                 Console.WriteLine("  " + verbindung.GetStart().GetName() + " zu " + verbindung.GetStopp().GetName());
+
             CDijkstra graph = new CDijkstra(new ArrayList(knoten), new ArrayList(verbindungen));
+
+            //Start/Stopknoten ermitteln und ausgeben
             Console.WriteLine("\nStart: \n  " + graph.ErmittleStartKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName());
-            Console.WriteLine("\nStopp: \n  " + graph.ErmittleEndKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName() + "\n");
+            Console.WriteLine("\nStopp: \n  " + graph.ErmittleEndKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName());
             
+            //Find a Soulution
             graph.Solve();
             
-            Console.WriteLine("Kürzester Weg: \n  " + graph.GetWeg());
+            //Ergebnis 
+            Console.WriteLine("\nKürzester Weg: \n  " + graph.GetWeg());
             Console.WriteLine("\nLänge des Weges: \n  " + graph.GetWegLänge());
+            
+            //Warten...:)
             Console.WriteLine("\n\n  (Press any key to exit...)");
             Console.ReadKey();
         }
