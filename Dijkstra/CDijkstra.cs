@@ -36,8 +36,9 @@ namespace Dijkstra
                     CVerbindung tmpVerbindung = ErmittleKürzesteVerbindung(new ArrayList(verbindungen), knt);
                     if (tmpVerbindung != null && tmpVerbindung.GetStopp() != stoppKnoten) RemoveVerbindung(tmpVerbindung);
                 }
+                
                 if (verbindung != null)
-                {
+                { 
                     int summe = verbindung.GetWert() + verbindung.GetStart().GetKnotenWert();
                     SetKnotenWert(verbindung.GetStopp(), summe);
                     SetState(verbindung.GetStopp(), "aktiv");
@@ -160,7 +161,7 @@ namespace Dijkstra
         /// <param name="verbindungen"></param>
         /// <param name="knoten"></param>
         /// <returns></returns>
-        private CKnote ErmittleStartKnoten(ArrayList verbindungen, ArrayList knoten) 
+        public CKnote ErmittleStartKnoten(ArrayList verbindungen, ArrayList knoten) 
         {
             foreach(CVerbindung verbindung in verbindungen)
                 for (int i = 0; i <= knoten.Count - 1; i++)
@@ -173,7 +174,7 @@ namespace Dijkstra
         /// <param name="verbindungen"></param>
         /// <param name="knoten"></param>
         /// <returns></returns>
-        private CKnote ErmittleEndKnoten(ArrayList verbindungen, ArrayList knoten) 
+        public CKnote ErmittleEndKnoten(ArrayList verbindungen, ArrayList knoten) 
         {
             foreach (CVerbindung verbindung in verbindungen)
                 for (int i = 0; i <= knoten.Count - 1; i++)

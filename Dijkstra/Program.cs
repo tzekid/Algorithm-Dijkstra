@@ -7,6 +7,9 @@ namespace Dijkstra
     {
         private static void Main()
         {
+            Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1");
+            Console.WriteLine("_______________________________________________________________________________");
+            
             ArrayList knoten = new ArrayList();
             knoten.Add(new CKnote("S", "offen"));//0
             knoten.Add(new CKnote("A", "offen"));//1
@@ -17,7 +20,7 @@ namespace Dijkstra
             knoten.Add(new CKnote("T", "offen"));//6
 
             ArrayList verbindungen = new ArrayList();
-            //S
+            //S (Start)
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[1], 4)); //S to A
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[2], 6)); //S to B
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[3], 5)); //S to C
@@ -35,11 +38,24 @@ namespace Dijkstra
             verbindungen.Add(new CVerbindung((CKnote)knoten[4], (CKnote)knoten[6], 6)); //D to T
             //E
             verbindungen.Add(new CVerbindung((CKnote)knoten[5], (CKnote)knoten[6], 8)); //E to T
-            //Z--->Keine weiteren Verbindungen
+            //T (Ziel)
 
-            CDijkstra graph = new CDijkstra(knoten, verbindungen);
-            Console.WriteLine(graph.Solve());
+            Console.WriteLine("\nAlle Knoten:");
+            foreach(CKnote knt in knoten)
+            {
+                Console.WriteLine("  " + knt.GetName());
+            }
+            Console.WriteLine("\nAlle Verbindungen:");
+            foreach(CVerbindung verbindung in verbindungen)
+            {
+                Console.WriteLine("  " + verbindung.GetStart().GetName() + " zu " + verbindung.GetStopp().GetName());
+            }
+            CDijkstra graph = new CDijkstra(new ArrayList(knoten), new ArrayList(verbindungen));
 
+            Console.WriteLine("\nStart: \n  " + graph.ErmittleStartKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName());
+            Console.WriteLine("\nStopp: \n  " + graph.ErmittleEndKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName() + "\n\n");
+
+            Console.WriteLine("Kürzester Weg, Länge des Weges: \n  " + graph.Solve());
             Console.ReadKey();
         }
     }
