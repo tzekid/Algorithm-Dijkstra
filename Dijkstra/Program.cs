@@ -45,24 +45,13 @@ namespace Dijkstra
             verbindungen.Add(new CVerbindung((CKnote)knoten[5], (CKnote)knoten[6], 8)); //E to T
             //T (Ziel)
 
-            /*ArrayList pflichtKnoten = new ArrayList();
-            pflichtKnoten.Add((CKnote)knoten[2]);
-
-            CDijkstraManager pfadManager = new CDijkstraManager(new ArrayList(verbindungen), new ArrayList(knoten), new ArrayList(pflichtKnoten));
-
-            pfadManager.Solve();
-
-            Console.WriteLine("Kürzester Weg durch den Graphen: " + pfadManager.GetWeg());
-            Console.WriteLine("\nLänge des Weges: " + pfadManager.GetLänge());
-            */
-            
             //Alle Knoten ausgeben
             Console.WriteLine("\nAlle Knoten:");
             foreach(CKnote knt in knoten)
-                Console.WriteLine("  " + knt.GetName());
+                Console.Write("  " + knt.GetName());
 
             //Alle Verbindungen ausgeben
-            Console.WriteLine("\nAlle Verbindungen:");
+            Console.WriteLine("\n\nAlle Verbindungen:");
             foreach(CVerbindung verbindung in verbindungen)
                 Console.WriteLine("  " + verbindung.GetStart().GetName() + " zu " + verbindung.GetStopp().GetName());
 
@@ -73,7 +62,8 @@ namespace Dijkstra
 
             //Ergebnis
             Console.WriteLine("\n\nKürzester Weg: ");
-            foreach(CVerbindung ver in list)
+
+            foreach (CVerbindung ver in list)
                 Console.WriteLine("  " + ver.GetStart().GetName() + " zu " + ver.GetStopp().GetName());
             
             //Warten...:)

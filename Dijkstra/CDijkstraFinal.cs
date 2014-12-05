@@ -35,6 +35,7 @@ namespace Dijkstra
             }
             return ErmittleEndWeg(rtnWeg);
         }
+
         private ArrayList ErmittleEndWeg(ArrayList rtnWeg)
         {
             CVerbindung stoppVer = (CVerbindung)rtnWeg[rtnWeg.Count - 1];
