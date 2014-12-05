@@ -6,6 +6,9 @@ namespace Dijkstra
         string name;
         string state;
         int wert;
+
+        int x;
+        int y;
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -56,6 +59,23 @@ namespace Dijkstra
         public void SetKnotenWert(int value)
         {
             wert = value;
+        }
+
+        public int GetX()
+        {
+            return x;
+        }
+        public int GetY()
+        {
+            return y;
+        }
+        public void SetX(int x)
+        {
+            this.x = x;
+        }
+        public void SetY(int y)
+        {
+            this.y = y;
         }
     }
 }

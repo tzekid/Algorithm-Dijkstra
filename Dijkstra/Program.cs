@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace Dijkstra
 {
@@ -9,10 +10,9 @@ namespace Dijkstra
         {
             //Console größer machen
             Console.SetWindowSize(Console.WindowWidth * 2, Console.WindowHeight * 2);
-
             Console.WriteLine("Dijkstra-Algorithmus - Version 1.0.1");
             Console.WriteLine("_______________________________________________________________________________");
-            
+
             //Knoten erstellen
             ArrayList knoten = new ArrayList();
             knoten.Add(new CKnote("S", "offen"));//0
@@ -65,10 +65,12 @@ namespace Dijkstra
 
             foreach (CVerbindung ver in list)
                 Console.WriteLine("  " + ver.GetStart().GetName() + " zu " + ver.GetStopp().GetName());
-            
+
+            FGraph window = new FGraph(new ArrayList(knoten), new ArrayList(verbindungen));
+            Application.Run(window);
             //Warten...:)
-            Console.WriteLine("\n\n(Press any key to exit...)");
-            Console.ReadKey();
+            //Console.WriteLine("\n\n(Press any key to exit...)");
+            //Console.ReadKey();
         }
     }
 }
