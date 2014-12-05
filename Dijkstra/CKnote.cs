@@ -18,18 +18,6 @@ namespace Dijkstra
             this.wert = 0;
         }
         /// <summary>
-        /// Konstruktor
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="state"></param>
-        /// <param name="wert"></param>
-        public CKnote(string name, string state, int wert)
-        {
-            this.name = name;
-            this.state = state;
-            this.wert = wert;
-        }
-        /// <summary>
         /// Gibt den Namen des Knotens zurück
         /// </summary>
         /// <returns></returns>

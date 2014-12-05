@@ -10,7 +10,7 @@ namespace Dijkstra
             //Console größer machen
             Console.SetWindowSize(Console.WindowWidth * 2, Console.WindowHeight * 2);
 
-            Console.WriteLine("Dijkstra-Algorythmus - Version 1.0.1");
+            Console.WriteLine("Dijkstra-Algorithmus - Version 1.0.1");
             Console.WriteLine("_______________________________________________________________________________");
             
             //Knoten erstellen
@@ -27,7 +27,7 @@ namespace Dijkstra
             ArrayList verbindungen = new ArrayList();
             //S (Start)
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[1], 4)); //S to A
-            verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[2], 6)); //S to B
+            verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[2], 6)); //S to B 
             verbindungen.Add(new CVerbindung((CKnote)knoten[0], (CKnote)knoten[3], 5)); //S to C
             //A
             verbindungen.Add(new CVerbindung((CKnote)knoten[1], (CKnote)knoten[2], 1)); //A to B
@@ -45,6 +45,17 @@ namespace Dijkstra
             verbindungen.Add(new CVerbindung((CKnote)knoten[5], (CKnote)knoten[6], 8)); //E to T
             //T (Ziel)
 
+            /*ArrayList pflichtKnoten = new ArrayList();
+            pflichtKnoten.Add((CKnote)knoten[2]);
+
+            CDijkstraManager pfadManager = new CDijkstraManager(new ArrayList(verbindungen), new ArrayList(knoten), new ArrayList(pflichtKnoten));
+
+            pfadManager.Solve();
+
+            Console.WriteLine("Kürzester Weg durch den Graphen: " + pfadManager.GetWeg());
+            Console.WriteLine("\nLänge des Weges: " + pfadManager.GetLänge());
+            */
+            
             //Alle Knoten ausgeben
             Console.WriteLine("\nAlle Knoten:");
             foreach(CKnote knt in knoten)
@@ -55,37 +66,19 @@ namespace Dijkstra
             foreach(CVerbindung verbindung in verbindungen)
                 Console.WriteLine("  " + verbindung.GetStart().GetName() + " zu " + verbindung.GetStopp().GetName());
 
-            CDijkstra graph = new CDijkstra(new ArrayList(knoten), new ArrayList(verbindungen));
-
-            //Start/Stopknoten ermitteln und ausgeben
-            Console.WriteLine("\nStart: \n  " + graph.ErmittleStartKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName());
-            Console.WriteLine("\nStopp: \n  " + graph.ErmittleEndKnoten(new ArrayList(verbindungen), new ArrayList(knoten)).GetName());
+            CDijkstraFinal graph = new CDijkstraFinal();
             
             //Find a Soulution
-            graph.Solve();
-            
-            //Ergebnis 
-            Console.WriteLine("\nKürzester Weg: \n  " + graph.GetWeg());
-            Console.WriteLine("\nLänge des Weges: \n  " + graph.GetWegLänge());
+            ArrayList list =  graph.Solve(new ArrayList(knoten), new ArrayList(verbindungen));
+
+            //Ergebnis
+            Console.WriteLine("\n\nKürzester Weg: ");
+            foreach(CVerbindung ver in list)
+                Console.WriteLine("  " + ver.GetStart().GetName() + " zu " + ver.GetStopp().GetName());
             
             //Warten...:)
-            Console.WriteLine("\n\n  (Press any key to exit...)");
+            Console.WriteLine("\n\n(Press any key to exit...)");
             Console.ReadKey();
         }
     }
 }
-
-
-
-//Pen pen = new Pen(Color.FromArgb(255, 0, 0, 0));
-//e.Graphics.DrawLine(pen, 20, 10, 300, 100);
-/*int x = 0;
-
-foreach(CKnote knt in knoten)
-{
-    Label lbn = new Label();
-    lbn.Location = new Point(x, 50);
-    lbn.Text = knt.GetName();
-    this.Controls.Add(lbn);
-    x += 20;
-}*/

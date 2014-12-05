@@ -7,8 +7,8 @@ namespace Dijkstra
     {
         private ArrayList knoten;
         private ArrayList verbindungen;
-        private string kürzesterWeg = "";
-        private int längeWeg = 0;
+        private string kürzesterWeg = "Fehler: Bitte erst Methode Solve() aufrufen!";
+        private int längeWeg = -1;
 
         public CDijkstra(ArrayList knoten, ArrayList verbindungen)
         {
@@ -71,7 +71,9 @@ namespace Dijkstra
             rtn += startVer.GetStart().GetName();
             string rtnFinal = "";
             for (int i = rtn.Length - 1; i > -1; i--)
-                rtnFinal += rtn[i] + " ";
+            {
+                rtnFinal += rtn[i] + " "; //if (i != 0) rtnFinal += "=>";
+            }
             längeWeg = stoppVer.GetStopp().GetKnotenWert();
             return rtnFinal;
         }
