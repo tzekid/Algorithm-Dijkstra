@@ -40,13 +40,10 @@
             this.Name = "FGraph";
             this.ShowIcon = false;
             this.Text = "FGraph";
-            this.Load += new System.EventHandler(this.FGraph_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FGraph_Paint);
             this.ResumeLayout(false);
 
         }
-
         #endregion
-
     }
 }

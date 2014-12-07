@@ -66,11 +66,11 @@ namespace Dijkstra
             foreach (CVerbindung ver in list)
                 Console.WriteLine("  " + ver.GetStart().GetName() + " zu " + ver.GetStopp().GetName());
 
-            FGraph window = new FGraph(new ArrayList(knoten), new ArrayList(verbindungen));
+
+            Console.WriteLine("\n\n(Zum Beenden Form schließen...)");
+            //Graph anzeigen
+            FGraph window = new FGraph(new ArrayList(knoten), new ArrayList(verbindungen), new ArrayList(list));
             Application.Run(window);
-            //Warten...:)
-            //Console.WriteLine("\n\n(Press any key to exit...)");
-            //Console.ReadKey();
         }
     }
 }

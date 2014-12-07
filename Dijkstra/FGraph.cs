@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 
 namespace Dijkstra
 {
     public partial class FGraph : Form
-    {
+    { 
         private ArrayList knoten;
         private ArrayList verbindungen;
-        public FGraph(ArrayList knoten, ArrayList verbindungen) : base()
+        private ArrayList weg;
+        public FGraph(ArrayList knoten, ArrayList verbindungen, ArrayList weg) : base()
         {
             InitializeComponent();
             this.knoten = knoten;
             this.verbindungen = verbindungen;
+            this.weg = weg;
         }
 
         private void FGraph_Paint(object sender, PaintEventArgs e)
@@ -74,19 +70,13 @@ namespace Dijkstra
             {
                 Pen pen = new Pen(Color.Red);
                 grfx.DrawLine(pen, new Point(ver.GetStart().GetX(), ver.GetStart().GetY()), new Point(ver.GetStopp().GetX(), ver.GetStopp().GetY()));
-
-                /*Label mylabel = new Label();
-                mylabel.Text = ver.GetWert().ToString();
-                mylabel.Size = new System.Drawing.Size(10, 10);
-                if (ver.GetStopp().GetY() > ver.GetStart().GetY() && ver.GetStopp().GetX() > ver.GetStopp().GetX()) mylabel.Location = new Point(ver.GetStopp().GetX() - ver.GetStart().GetX(), ver.GetStopp().GetY() - ver.GetStart().GetY());
-                //mylabel.Location = new Point(ver.GetStopp().GetX() - ver.GetStart().GetX(), ver.GetStart().GetY() - ver.GetStopp().GetY());
-                this.Controls.Add(mylabel);*/
             }
-        }
-
-        private void FGraph_Load(object sender, EventArgs e)
-        {
-
+            this.Left = 1000;
+            foreach (CVerbindung ver in weg)
+            {
+                Pen pen = new Pen(Color.Blue);
+                grfx.DrawLine(pen, new Point(ver.GetStart().GetX(), ver.GetStart().GetY()), new Point(ver.GetStopp().GetX(), ver.GetStopp().GetY()));
+            }
         }
     }
 }
