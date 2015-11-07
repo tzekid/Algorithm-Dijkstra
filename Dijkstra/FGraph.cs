@@ -24,7 +24,7 @@ namespace Dijkstra
             grfx.Clear(System.Drawing.SystemColors.Control);
 
             //Punte zeichnen 
-            int x = 20;
+            int x = 72;
             int y = 90;
             bool oben = true;
             foreach(CKnote knt in knoten)
@@ -32,12 +32,12 @@ namespace Dijkstra
                 SolidBrush brush = new SolidBrush(Color.Green);
                 if (oben)
                 {
-                    y = y - 70;
+                    y = y - 69;
                     oben = false;
                 }
                 else
                 {
-                    y += 70;
+                    y += 75;
                     oben = true;
                 }
                 knt.SetX(x);
@@ -55,12 +55,12 @@ namespace Dijkstra
                         ver.GetStopp().SetY(y);
                     }
                 }
-                grfx.FillRectangle(brush, x - 5, y - 5, 10, 10);
-                x += 80;
+                grfx.FillRectangle(brush, x - 9, y - 9, 15, 15);
+                x += 81;
                 Label mylabel = new Label();
                 mylabel.Name = knt.GetName() + "label";
                 mylabel.Text = knt.GetName();
-                mylabel.Size = new System.Drawing.Size(10, 10);
+                mylabel.Size = new System.Drawing.Size(9, 9);
                 mylabel.Location = new Point(knt.GetX(), knt.GetY());
                 this.Controls.Add(mylabel);
             }
